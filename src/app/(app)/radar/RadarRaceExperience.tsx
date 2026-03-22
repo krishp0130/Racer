@@ -1,11 +1,23 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type FormEvent,
+} from "react";
 import Map, { Marker } from "react-map-gl/maplibre";
 import maplibregl from "maplibre-gl";
 import type { LngLat } from "@/lib/geo";
 import { haversineMeters, interpolateToward, metersToMiles } from "@/lib/geo";
-import type { Vehicle } from "@/types/ontology";
+import {
+  bundleFromMatch,
+  getDefaultOpponentBundle,
+  mockLlmMatchRaceQuery,
+  type OpponentBundle,
+} from "@/services/aipMatchmaker";
 import "maplibre-gl/dist/maplibre-gl.css";
 
 const MAP_STYLE = "https://demotiles.maplibre.org/style.json";
@@ -13,22 +25,6 @@ const MAP_STYLE = "https://demotiles.maplibre.org/style.json";
 const INITIAL_CENTER: LngLat = {
   longitude: -122.4194,
   latitude: 37.7749,
-};
-
-const OPPONENT: { username: string; vehicle: Vehicle; position: LngLat } = {
-  username: "NeonShift",
-  vehicle: {
-    id: "veh-opp-1",
-    make: "Porsche",
-    model: "911 GT3",
-    year: 2022,
-    horsepower: 502,
-    class: "GT",
-  },
-  position: {
-    longitude: INITIAL_CENTER.longitude + 0.008,
-    latitude: INITIAL_CENTER.latitude + 0.004,
-  },
 };
 
 type Phase =
@@ -48,14 +44,26 @@ function formatMiles(meters: number): string {
 
 export default function RadarRaceExperience() {
   const [phase, setPhase] = useState<Phase>("browsing");
+  const [opponent, setOpponent] = useState<OpponentBundle>(() =>
+    getDefaultOpponentBundle(),
+  );
   const [finish, setFinish] = useState<LngLat | null>(null);
   const [userPos, setUserPos] = useState<LngLat>(INITIAL_CENTER);
   const [speedMph, setSpeedMph] = useState(0);
   const [countdownLabel, setCountdownLabel] = useState<string | null>(null);
   const [acceptNotice, setAcceptNotice] = useState(false);
+  const [aipQuery, setAipQuery] = useState("");
+  const [aipLoading, setAipLoading] = useState(false);
+  const [aipBanner, setAipBanner] = useState<string | null>(null);
   const acceptTimersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
   const raceTickRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const raceSpeedRef = useRef(0);
+  const aipBannerTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const showAipChat =
+    phase === "browsing" ||
+    phase === "opponentSheet" ||
+    phase === "placingFinish";
 
   const distanceRemaining = useMemo(() => {
     if (!finish || phase !== "active") return null;
@@ -78,8 +86,21 @@ export default function RadarRaceExperience() {
     return () => {
       clearAcceptTimers();
       clearRaceTick();
+      if (aipBannerTimerRef.current) clearTimeout(aipBannerTimerRef.current);
     };
   }, [clearAcceptTimers, clearRaceTick]);
+
+  useEffect(() => {
+    if (!aipBanner) return;
+    if (aipBannerTimerRef.current) clearTimeout(aipBannerTimerRef.current);
+    aipBannerTimerRef.current = setTimeout(() => {
+      setAipBanner(null);
+      aipBannerTimerRef.current = null;
+    }, 5200);
+    return () => {
+      if (aipBannerTimerRef.current) clearTimeout(aipBannerTimerRef.current);
+    };
+  }, [aipBanner]);
 
   useEffect(() => {
     if (phase !== "awaitingAccept" || !finish) return;
@@ -182,6 +203,35 @@ export default function RadarRaceExperience() {
     [phase],
   );
 
+  const onAipSubmit = useCallback(
+    async (e: FormEvent) => {
+      e.preventDefault();
+      if (aipLoading || !showAipChat) return;
+      const q = aipQuery.trim();
+      if (!q) return;
+      setAipLoading(true);
+      try {
+        const match = await mockLlmMatchRaceQuery(q);
+        if (match) {
+          setOpponent(bundleFromMatch(match));
+          setFinish(null);
+          setAipBanner(
+            `AIP Match Found: Challenging ${match.driver.username} in a ${match.vehicle.make} ${match.vehicle.model}`,
+          );
+          setPhase("placingFinish");
+          setAipQuery("");
+        } else {
+          setAipBanner(
+            "No AIP match — try another query (e.g. JDM under 400hp).",
+          );
+        }
+      } finally {
+        setAipLoading(false);
+      }
+    },
+    [aipLoading, aipQuery, showAipChat],
+  );
+
   const mapCursor =
     phase === "placingFinish" ? "crosshair" : "grab";
 
@@ -214,8 +264,8 @@ export default function RadarRaceExperience() {
           attributionControl={false}
         >
           <Marker
-            longitude={OPPONENT.position.longitude}
-            latitude={OPPONENT.position.latitude}
+            longitude={opponent.position.longitude}
+            latitude={opponent.position.latitude}
             anchor="center"
           >
             <button
@@ -226,7 +276,7 @@ export default function RadarRaceExperience() {
                 openOpponent();
               }}
               className="relative flex h-11 w-11 items-center justify-center rounded-full border-2 border-[var(--accent)] bg-[color-mix(in_oklab,var(--surface-elevated)_82%,transparent)] shadow-[0_0_28px_var(--accent-soft)] backdrop-blur-md transition-[transform,opacity] active:scale-95 enabled:hover:brightness-110 disabled:pointer-events-none disabled:opacity-35"
-              aria-label={`Open ${OPPONENT.username} profile`}
+              aria-label={`Open ${opponent.username} profile`}
             >
               <span className="absolute inset-0 animate-ping rounded-full bg-[var(--accent)] opacity-20" />
               <span className="relative text-xs font-bold text-[var(--accent)]">
@@ -265,6 +315,47 @@ export default function RadarRaceExperience() {
           ) : null}
         </Map>
 
+        {showAipChat ? (
+          <div className="pointer-events-auto absolute left-3 right-3 top-3 z-[28] flex justify-center sm:left-4 sm:right-4 sm:top-4">
+            <form
+              onSubmit={onAipSubmit}
+              className="flex w-full max-w-lg items-center gap-2 rounded-2xl border border-[var(--border)] bg-[color-mix(in_oklab,var(--surface-elevated)_78%,transparent)] px-3 py-2 shadow-[0_8px_32px_rgba(0,0,0,0.35)] backdrop-blur-xl"
+            >
+              <span
+                className="shrink-0 rounded-md bg-[var(--accent-glow)] px-1.5 py-0.5 text-[0.55rem] font-bold uppercase tracking-[0.12em] text-[var(--accent)]"
+                aria-hidden
+              >
+                AIP
+              </span>
+              <input
+                type="search"
+                name="aip-race-query"
+                value={aipQuery}
+                onChange={(ev) => setAipQuery(ev.target.value)}
+                placeholder="Ask AIP for a race..."
+                autoComplete="off"
+                disabled={aipLoading}
+                className="min-w-0 flex-1 bg-transparent text-sm text-[var(--foreground)] outline-none placeholder:text-[var(--muted)] disabled:opacity-50"
+              />
+              <button
+                type="submit"
+                disabled={aipLoading || !aipQuery.trim()}
+                className="shrink-0 rounded-xl bg-[var(--accent)] px-3 py-2 text-xs font-bold uppercase tracking-wider text-[#04100e] shadow-[0_0_20px_var(--accent-soft)] transition-opacity disabled:opacity-40"
+              >
+                {aipLoading ? "…" : "Run"}
+              </button>
+            </form>
+          </div>
+        ) : null}
+
+        {aipBanner ? (
+          <div className="pointer-events-none absolute left-3 right-3 top-[4.25rem] z-[27] flex justify-center sm:top-[4.5rem]">
+            <p className="max-w-lg rounded-xl border border-[var(--accent-soft)] bg-[color-mix(in_oklab,#0a1018_92%,var(--accent)_8%)] px-4 py-2.5 text-center text-xs font-medium leading-snug text-[var(--foreground)] shadow-[0_0_24px_var(--accent-soft)] backdrop-blur-md animate-[race-toast_0.45s_ease-out_both] sm:text-sm">
+              {aipBanner}
+            </p>
+          </div>
+        ) : null}
+
         {phase === "placingFinish" ? (
           <div className="pointer-events-none absolute inset-x-0 bottom-4 z-20 flex justify-center px-3">
             <div className="max-w-md rounded-2xl border border-[var(--border)] bg-[color-mix(in_oklab,var(--surface-elevated)_88%,transparent)] px-4 py-3 text-center shadow-xl backdrop-blur-xl">
@@ -281,7 +372,7 @@ export default function RadarRaceExperience() {
         {acceptNotice ? (
           <div className="pointer-events-none absolute inset-x-0 top-16 z-30 flex justify-center px-3">
             <div className="animate-[race-toast_0.5s_ease-out_both] rounded-full border border-[var(--accent-soft)] bg-[color-mix(in_oklab,var(--surface-elevated)_90%,transparent)] px-5 py-2 text-sm font-medium text-[var(--accent)] shadow-[0_0_32px_var(--accent-soft)] backdrop-blur-md">
-              {OPPONENT.username} accepted — staging line
+              {opponent.username} accepted — staging line
             </div>
           </div>
         ) : null}
@@ -338,7 +429,7 @@ export default function RadarRaceExperience() {
                       id="opponent-sheet-title"
                       className="mt-1 text-xl font-semibold tracking-tight"
                     >
-                      {OPPONENT.username}
+                      {opponent.username}
                     </h2>
                   </div>
                   <button
@@ -364,8 +455,8 @@ export default function RadarRaceExperience() {
                     Vehicle
                   </p>
                   <p className="mt-2 text-lg font-semibold leading-snug">
-                    {OPPONENT.vehicle.year} {OPPONENT.vehicle.make}{" "}
-                    {OPPONENT.vehicle.model}
+                    {opponent.vehicle.year} {opponent.vehicle.make}{" "}
+                    {opponent.vehicle.model}
                   </p>
                   <div className="mt-4 grid grid-cols-3 gap-3 text-center">
                     <div className="rounded-xl bg-[var(--surface-elevated)] px-2 py-3">
@@ -373,7 +464,7 @@ export default function RadarRaceExperience() {
                         Make
                       </p>
                       <p className="mt-1 text-sm font-semibold">
-                        {OPPONENT.vehicle.make}
+                        {opponent.vehicle.make}
                       </p>
                     </div>
                     <div className="rounded-xl bg-[var(--surface-elevated)] px-2 py-3">
@@ -381,7 +472,7 @@ export default function RadarRaceExperience() {
                         Model
                       </p>
                       <p className="mt-1 text-sm font-semibold">
-                        {OPPONENT.vehicle.model}
+                        {opponent.vehicle.model}
                       </p>
                     </div>
                     <div className="rounded-xl bg-[var(--surface-elevated)] px-2 py-3">
@@ -389,7 +480,7 @@ export default function RadarRaceExperience() {
                         HP
                       </p>
                       <p className="mt-1 text-sm font-semibold tabular-nums text-[var(--accent)]">
-                        {OPPONENT.vehicle.horsepower}
+                        {opponent.vehicle.horsepower}
                       </p>
                     </div>
                   </div>
