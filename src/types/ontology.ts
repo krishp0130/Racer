@@ -1,3 +1,9 @@
+/**
+ * Core racing / telemetry Ontology objects.
+ * Community, garage, chat, and forum types live in `communityOntology.ts`
+ * (same JSON blob in MVP localStorage, separate Foundry object types later).
+ */
+
 export interface Driver {
   id: string;
   username: string;

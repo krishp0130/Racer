@@ -20,7 +20,8 @@ import {
 } from "@/services/aipMatchmaker";
 import "maplibre-gl/dist/maplibre-gl.css";
 
-const MAP_STYLE = "https://demotiles.maplibre.org/style.json";
+/** OpenStreetMap-based vector tiles (streets, labels, POIs) — free, no API key. @see https://openfreemap.org/ */
+const MAP_STYLE = "https://tiles.openfreemap.org/styles/dark";
 
 const INITIAL_CENTER: LngLat = {
   longitude: -122.4194,
@@ -236,18 +237,23 @@ export default function RadarRaceExperience() {
     phase === "placingFinish" ? "crosshair" : "grab";
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col gap-4 px-4 pb-2 pt-5 sm:px-6">
-      <header className="pointer-events-none relative z-10 shrink-0 select-none">
-        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
-          Live grid
+    <div className="mx-auto flex h-full min-h-0 w-full max-w-[1680px] flex-1 flex-col gap-5 px-4 pb-3 pt-5 md:min-h-[calc(100dvh-2rem)] md:gap-6 md:px-8 md:pb-6 md:pt-6 lg:px-10">
+      <header className="pointer-events-none relative z-10 shrink-0 select-none md:flex md:items-end md:justify-between">
+        <div>
+          <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--accent)] md:text-xs">
+            Live grid
+          </p>
+          <h1 className="mt-1 font-semibold text-2xl tracking-tight text-[var(--foreground)] md:text-3xl lg:text-4xl">
+            Radar
+          </h1>
+        </div>
+        <p className="mt-2 hidden max-w-xl text-sm leading-relaxed text-[var(--muted)] md:mt-0 md:block md:max-w-md md:text-right lg:max-w-lg">
+          Map, AIP matchmaking, and sprint staging — use the full width below.
         </p>
-        <h1 className="mt-1 font-semibold text-2xl tracking-tight text-[var(--foreground)]">
-          Radar
-        </h1>
       </header>
 
       <div
-        className={`relative z-0 flex min-h-[min(520px,62vh)] flex-1 overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-[0_0_0_1px_color-mix(in_oklab,var(--accent)_12%,transparent)] ${
+        className={`relative z-0 flex min-h-[min(480px,55vh)] flex-1 overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-[0_0_0_1px_color-mix(in_oklab,var(--accent)_12%,transparent)] md:min-h-[calc(100dvh-13rem)] lg:min-h-[calc(100dvh-12rem)] ${
           phase === "placingFinish" ? "ring-2 ring-[var(--accent-soft)]" : ""
         }`}
       >
@@ -257,6 +263,8 @@ export default function RadarRaceExperience() {
             ...INITIAL_CENTER,
             zoom: 12.4,
           }}
+          maxZoom={18}
+          minZoom={10}
           style={{ width: "100%", height: "100%" }}
           mapStyle={MAP_STYLE}
           onClick={onMapClick}
@@ -316,10 +324,10 @@ export default function RadarRaceExperience() {
         </Map>
 
         {showAipChat ? (
-          <div className="pointer-events-auto absolute left-3 right-3 top-3 z-[28] flex justify-center sm:left-4 sm:right-4 sm:top-4">
+          <div className="pointer-events-auto absolute left-3 right-3 top-3 z-[28] flex justify-center sm:left-5 sm:right-5 sm:top-5 md:left-6 md:right-6 md:top-6">
             <form
               onSubmit={onAipSubmit}
-              className="flex w-full max-w-lg items-center gap-2 rounded-2xl border border-[var(--border)] bg-[color-mix(in_oklab,var(--surface-elevated)_78%,transparent)] px-3 py-2 shadow-[0_8px_32px_rgba(0,0,0,0.35)] backdrop-blur-xl"
+              className="flex w-full max-w-2xl items-center gap-2 rounded-2xl border border-[var(--border)] bg-[color-mix(in_oklab,var(--surface-elevated)_78%,transparent)] px-3 py-2 shadow-[0_8px_32px_rgba(0,0,0,0.35)] backdrop-blur-xl md:gap-3 md:px-4 md:py-2.5"
             >
               <span
                 className="shrink-0 rounded-md bg-[var(--accent-glow)] px-1.5 py-0.5 text-[0.55rem] font-bold uppercase tracking-[0.12em] text-[var(--accent)]"
@@ -335,7 +343,7 @@ export default function RadarRaceExperience() {
                 placeholder="Ask AIP for a race..."
                 autoComplete="off"
                 disabled={aipLoading}
-                className="min-w-0 flex-1 bg-transparent text-sm text-[var(--foreground)] outline-none placeholder:text-[var(--muted)] disabled:opacity-50"
+                className="min-w-0 flex-1 bg-transparent text-sm text-[var(--foreground)] outline-none placeholder:text-[var(--muted)] disabled:opacity-50 md:text-base"
               />
               <button
                 type="submit"
@@ -349,8 +357,8 @@ export default function RadarRaceExperience() {
         ) : null}
 
         {aipBanner ? (
-          <div className="pointer-events-none absolute left-3 right-3 top-[4.25rem] z-[27] flex justify-center sm:top-[4.5rem]">
-            <p className="max-w-lg rounded-xl border border-[var(--accent-soft)] bg-[color-mix(in_oklab,#0a1018_92%,var(--accent)_8%)] px-4 py-2.5 text-center text-xs font-medium leading-snug text-[var(--foreground)] shadow-[0_0_24px_var(--accent-soft)] backdrop-blur-md animate-[race-toast_0.45s_ease-out_both] sm:text-sm">
+          <div className="pointer-events-none absolute left-3 right-3 top-[4.25rem] z-[27] flex justify-center sm:top-[4.75rem] md:top-[5.25rem]">
+            <p className="max-w-2xl rounded-xl border border-[var(--accent-soft)] bg-[color-mix(in_oklab,#0a1018_92%,var(--accent)_8%)] px-4 py-2.5 text-center text-xs font-medium leading-snug text-[var(--foreground)] shadow-[0_0_24px_var(--accent-soft)] backdrop-blur-md animate-[race-toast_0.45s_ease-out_both] sm:text-sm md:text-base">
               {aipBanner}
             </p>
           </div>
@@ -378,15 +386,15 @@ export default function RadarRaceExperience() {
         ) : null}
 
         {phase === "active" && distanceRemaining !== null ? (
-          <div className="pointer-events-none absolute left-3 right-3 top-3 z-30 flex gap-2 sm:left-4 sm:right-4 sm:top-4">
-            <div className="flex flex-1 items-center justify-between gap-3 rounded-2xl border border-[var(--border)] bg-[color-mix(in_oklab,var(--surface-elevated)_86%,transparent)] px-4 py-3 shadow-lg backdrop-blur-xl">
+          <div className="pointer-events-none absolute left-3 right-3 top-3 z-30 flex justify-center gap-2 sm:left-5 sm:right-5 sm:top-5 md:left-6 md:right-6 md:top-6">
+            <div className="flex w-full max-w-3xl flex-1 items-center justify-between gap-4 rounded-2xl border border-[var(--border)] bg-[color-mix(in_oklab,var(--surface-elevated)_86%,transparent)] px-5 py-4 shadow-lg backdrop-blur-xl md:px-8 md:py-5">
               <div>
                 <p className="text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-[var(--muted)]">
                   Speed
                 </p>
-                <p className="font-mono text-xl font-semibold tabular-nums text-[var(--foreground)]">
+                <p className="font-mono text-xl font-semibold tabular-nums text-[var(--foreground)] md:text-2xl">
                   {Math.round(speedMph)}{" "}
-                  <span className="text-sm font-medium text-[var(--muted)]">
+                  <span className="text-sm font-medium text-[var(--muted)] md:text-base">
                     mph
                   </span>
                 </p>
@@ -396,7 +404,7 @@ export default function RadarRaceExperience() {
                 <p className="text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-[var(--muted)]">
                   To finish
                 </p>
-                <p className="font-mono text-xl font-semibold tabular-nums text-[var(--accent)]">
+                <p className="font-mono text-xl font-semibold tabular-nums text-[var(--accent)] md:text-2xl">
                   {formatMiles(distanceRemaining)}
                 </p>
               </div>
@@ -413,7 +421,7 @@ export default function RadarRaceExperience() {
               onClick={closeSheet}
             />
             <div
-              className="absolute inset-x-0 bottom-0 z-50 max-h-[85dvh] overflow-y-auto rounded-t-3xl border border-[var(--border)] border-b-0 bg-[color-mix(in_oklab,var(--surface-elevated)_94%,transparent)] shadow-[0_-12px_48px_rgba(0,0,0,0.45)] backdrop-blur-2xl animate-[race-sheet_0.4s_cubic-bezier(0.22,1,0.36,1)_both] sm:inset-x-auto sm:bottom-6 sm:left-1/2 sm:w-full sm:max-w-md sm:-translate-x-1/2 sm:rounded-3xl sm:border-b"
+              className="absolute inset-x-0 bottom-0 z-50 max-h-[85dvh] overflow-y-auto rounded-t-3xl border border-[var(--border)] border-b-0 bg-[color-mix(in_oklab,var(--surface-elevated)_94%,transparent)] shadow-[0_-12px_48px_rgba(0,0,0,0.45)] backdrop-blur-2xl animate-[race-sheet_0.4s_cubic-bezier(0.22,1,0.36,1)_both] sm:inset-x-auto sm:bottom-6 sm:left-1/2 sm:w-full sm:max-w-lg sm:-translate-x-1/2 sm:rounded-3xl sm:border-b lg:bottom-auto lg:top-1/2 lg:max-h-[min(720px,90vh)] lg:max-w-xl lg:-translate-y-1/2"
               role="dialog"
               aria-modal="true"
               aria-labelledby="opponent-sheet-title"
@@ -530,22 +538,44 @@ export default function RadarRaceExperience() {
         ) : null}
       </div>
 
-      <footer className="relative z-10 shrink-0 rounded-xl border border-[var(--border)] bg-[color-mix(in_oklab,var(--surface-elevated)_85%,transparent)] px-4 py-3 backdrop-blur-sm">
-        <div className="flex items-center justify-between gap-3 text-[0.7rem] font-mono uppercase tracking-wider text-[var(--muted)]">
-          <span className="tabular-nums">
-            {INITIAL_CENTER.latitude.toFixed(3)}°N
-          </span>
-          <span className="text-[var(--accent)]">
-            {phase === "browsing" && "Scan live"}
-            {phase === "opponentSheet" && "Profile open"}
-            {phase === "placingFinish" && "Place finish"}
-            {phase === "awaitingAccept" && "Awaiting rival"}
-            {phase === "countdown" && "Grid lock"}
-            {phase === "active" && "Sprint live"}
-          </span>
-          <span className="tabular-nums">
-            {Math.abs(INITIAL_CENTER.longitude).toFixed(3)}°W
-          </span>
+      <footer className="relative z-10 shrink-0 rounded-xl border border-[var(--border)] bg-[color-mix(in_oklab,var(--surface-elevated)_85%,transparent)] px-4 py-3 backdrop-blur-sm md:px-6 md:py-4">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
+          <div className="flex items-center justify-between gap-3 text-[0.7rem] font-mono uppercase tracking-wider text-[var(--muted)] md:text-xs">
+            <span className="tabular-nums">
+              {INITIAL_CENTER.latitude.toFixed(3)}°N
+            </span>
+            <span className="text-[var(--accent)]">
+              {phase === "browsing" && "Scan live"}
+              {phase === "opponentSheet" && "Profile open"}
+              {phase === "placingFinish" && "Place finish"}
+              {phase === "awaitingAccept" && "Awaiting rival"}
+              {phase === "countdown" && "Grid lock"}
+              {phase === "active" && "Sprint live"}
+            </span>
+            <span className="tabular-nums">
+              {Math.abs(INITIAL_CENTER.longitude).toFixed(3)}°W
+            </span>
+          </div>
+          <p className="text-center text-[0.6rem] leading-snug text-[var(--muted)] sm:text-right md:text-[0.65rem]">
+            Map: ©{" "}
+            <a
+              href="https://www.openstreetmap.org/copyright"
+              className="underline decoration-white/20 underline-offset-2 hover:text-[var(--foreground)]"
+              target="_blank"
+              rel="noreferrer"
+            >
+              OpenStreetMap
+            </a>{" "}
+            ·{" "}
+            <a
+              href="https://openfreemap.org/"
+              className="underline decoration-white/20 underline-offset-2 hover:text-[var(--foreground)]"
+              target="_blank"
+              rel="noreferrer"
+            >
+              OpenFreeMap
+            </a>
+          </p>
         </div>
       </footer>
     </div>
