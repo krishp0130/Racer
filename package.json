@@ -2,6 +2,14 @@
   "name": "racer",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/krishp0130/Racer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/krishp0130/Racer/issues"
+  },
+  "homepage": "https://github.com/krishp0130/Racer#readme",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

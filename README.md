@@ -2,6 +2,22 @@
 
 Mobile-first web app for a car community: live radar-style map, driver profiles, sprint challenges, and a synchronized race countdown with an in-race HUD. Built as a [Next.js](https://nextjs.org/) (App Router) + TypeScript + Tailwind CSS prototype, with TypeScript types aligned to a Palantir Foundry–style ontology.
 
+## Repository
+
+| | |
+|---|---|
+| **GitHub** | [github.com/krishp0130/Racer](https://github.com/krishp0130/Racer) |
+| **Clone** | `git clone https://github.com/krishp0130/Racer.git` |
+
+## Documentation
+
+| File | Purpose |
+|------|---------|
+| [README.md](README.md) | Overview, setup, architecture, radar flow, ontology notes |
+| [LICENSE](LICENSE) | MIT license |
+| [AGENTS.md](AGENTS.md) | Notes for AI agents working on this Next.js codebase |
+| [scripts/publish-github.sh](scripts/publish-github.sh) | Optional helper to create/push a new remote with `gh` |
+
 ## Features
 
 - **Dark, racing-inspired shell** with bottom navigation: Radar (map), Garages (profile), Leaderboard.
@@ -26,8 +42,8 @@ Mobile-first web app for a car community: live radar-style map, driver profiles,
 ## Getting started
 
 ```bash
-git clone <your-repo-url> racer
-cd racer
+git clone https://github.com/krishp0130/Racer.git
+cd Racer
 npm install
 npm run dev
 ```
@@ -88,41 +104,18 @@ Types in `src/types/ontology.ts` mirror objects you might define in Foundry:
 
 Pipelines, Actions, and AIP can later own authoritative race state, telemetry ingestion, and natural-language ops on these objects.
 
-## Publishing to GitHub
+## Git remotes and new repos
 
-Use the [GitHub CLI](https://cli.github.com/) (`brew install gh`).
+This project’s **canonical remote** is [github.com/krishp0130/Racer](https://github.com/krishp0130/Racer). Clone and pull from there.
 
-**Interactive (recommended):** log in once, then run the helper script:
+To publish a **fork or new copy** under another account, use the [GitHub CLI](https://cli.github.com/) (`brew install gh`):
 
 ```bash
 gh auth login
+./scripts/publish-github.sh your-repo-name
 ```
 
-**Automation / sandboxed terminals:** set a [personal access token](https://github.com/settings/tokens) with the `repo` scope, then:
-
-```bash
-export GH_TOKEN=ghp_your_token_here
-./scripts/publish-github.sh
-```
-
-From the repo root, create a **public** repo under your account, add `origin`, and push `main`:
-
-```bash
-./scripts/publish-github.sh
-```
-
-Optional: pass a repo name (default is `racer`):
-
-```bash
-./scripts/publish-github.sh my-racer-app
-```
-
-If you prefer the browser: create an empty repo on GitHub, then:
-
-```bash
-git remote add origin https://github.com/<you>/<repo>.git
-git push -u origin main
-```
+In automation (or when `gh` has no TTY), set `GH_TOKEN` to a [personal access token](https://github.com/settings/tokens) with the `repo` scope. On macOS, credentials stored for `github.com` in the Keychain (e.g. via Git) are often usable as `GH_TOKEN` when passed explicitly.
 
 ## License
 
