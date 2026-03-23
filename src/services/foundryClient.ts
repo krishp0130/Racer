@@ -1,4 +1,10 @@
 import { haversineMeters, type LngLat } from "@/lib/geo";
+import { loadCommunityState } from "@/lib/communityStore";
+import { shouldExposeDriverToViewer } from "@/lib/locationSharing";
+import type {
+  FriendRequest,
+  MemberProfile,
+} from "@/types/communityOntology";
 import type { Driver, LiveTelemetry, Race, RaceStatus } from "@/types/ontology";
 
 const RACE_STATUSES: RaceStatus[] = [
@@ -52,6 +58,12 @@ function isRaceStatus(value: string): value is RaceStatus {
 /** Seeded demo drivers (Ontology `Driver` has no geometry; positions come from latest telemetry). */
 const SEED_DRIVERS: Driver[] = [
   {
+    id: "drv-krish",
+    username: "krishpatel",
+    vehicleId: "veh-krish-r34",
+    eloRating: 1500,
+  },
+  {
     id: "drv-seed-1",
     username: "NeonShift",
     vehicleId: "veh-opp-1",
@@ -72,6 +84,14 @@ const SEED_DRIVERS: Driver[] = [
 ];
 
 const SEED_TELEMETRY: LiveTelemetry[] = [
+  {
+    driverId: "drv-krish",
+    latitude: 37.7765,
+    longitude: -122.418,
+    speed: 35,
+    heading: 270,
+    timestamp: new Date().toISOString(),
+  },
   {
     driverId: "drv-seed-1",
     latitude: 37.7789,
@@ -175,6 +195,17 @@ export class FoundryClient {
   }
 
   /**
+   * Merge Ontology `Driver` rows (e.g. synthetic seed) without clearing existing keys.
+   * Persists to `localStorage` for the mock Foundry store.
+   */
+  mergeDrivers(drivers: Driver[]): void {
+    for (const d of drivers) {
+      this.drivers.set(d.id, d);
+    }
+    this.persist();
+  }
+
+  /**
    * Upsert live telemetry for a driver (streaming pipeline → Ontology object or time-series).
    */
   async updateTelemetry(telemetry: LiveTelemetry): Promise<void> {
@@ -182,6 +213,14 @@ export class FoundryClient {
     // await client(LiveTelemetry).createOrUpdate(telemetry)
     // or Actions API: client.actions.updateDriverTelemetry({ ...telemetry })
     this.telemetryByDriver.set(telemetry.driverId, { ...telemetry });
+    this.persist();
+  }
+
+  /** Apply many telemetry rows then persist once (simulation ticks / bulk ingest). */
+  mergeTelemetryBatch(rows: LiveTelemetry[]): void {
+    for (const t of rows) {
+      this.telemetryByDriver.set(t.driverId, { ...t });
+    }
     this.persist();
   }
 
@@ -231,12 +270,25 @@ export class FoundryClient {
     lat: number,
     lng: number,
     radius: number,
+    viewerMemberId?: string,
   ): Promise<Driver[]> {
     // TODO: Replace with Palantir OSDK / Foundry API geo query, e.g.:
     // return client(Driver).search().nearby({ latitude: lat, longitude: lng, radiusMeters: radius })
     // or a custom Function-backed endpoint that returns Driver[].
     const origin: LngLat = { latitude: lat, longitude: lng };
     const out: Driver[] = [];
+
+    const profilesByDriverId = new Map<string, MemberProfile>();
+    let friendRequests: FriendRequest[] = [];
+    if (isBrowser()) {
+      const state = loadCommunityState();
+      friendRequests = state.friendRequests;
+      for (const p of state.memberProfiles) {
+        if (p.telemetryDriverId) {
+          profilesByDriverId.set(p.telemetryDriverId, p);
+        }
+      }
+    }
 
     for (const [driverId, telem] of this.telemetryByDriver) {
       const dM = haversineMeters(origin, {
@@ -246,9 +298,22 @@ export class FoundryClient {
       if (dM > radius) continue;
 
       const driver = this.drivers.get(driverId);
-      if (driver) {
-        out.push(driver);
+      if (!driver) continue;
+
+      const profile = profilesByDriverId.get(driverId);
+      if (
+        profile &&
+        !shouldExposeDriverToViewer(
+          profile,
+          telem,
+          viewerMemberId,
+          friendRequests,
+        )
+      ) {
+        continue;
       }
+
+      out.push(driver);
     }
 
     return out.sort((a, b) => a.username.localeCompare(b.username));

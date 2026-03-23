@@ -1,4 +1,7 @@
-import type { CommunityOntologyState } from "@/types/communityOntology";
+import type {
+  CommunityOntologyState,
+  MemberProfile,
+} from "@/types/communityOntology";
 import {
   COMMUNITY_STORAGE_KEY,
   SEED_COMMUNITY_STATE,
@@ -6,6 +9,23 @@ import {
 
 function clone<T>(x: T): T {
   return JSON.parse(JSON.stringify(x)) as T;
+}
+
+function normalizeMemberProfile(p: MemberProfile): MemberProfile {
+  return {
+    ...p,
+    telemetryDriverId: p.telemetryDriverId ?? null,
+    locationShareEnabled: p.locationShareEnabled ?? true,
+    locationShareWhenDrivingOnly: p.locationShareWhenDrivingOnly ?? false,
+    locationShareFriendsOnly: p.locationShareFriendsOnly ?? false,
+  };
+}
+
+function normalizeCommunityState(s: CommunityOntologyState): CommunityOntologyState {
+  return {
+    ...s,
+    memberProfiles: s.memberProfiles.map(normalizeMemberProfile),
+  };
 }
 
 export function newEntityId(prefix: string): string {
@@ -20,19 +40,20 @@ export function loadCommunityState(): CommunityOntologyState {
   try {
     const raw = localStorage.getItem(COMMUNITY_STORAGE_KEY);
     if (!raw) {
-      const initial = clone(SEED_COMMUNITY_STATE);
+      const initial = normalizeCommunityState(clone(SEED_COMMUNITY_STATE));
       localStorage.setItem(COMMUNITY_STORAGE_KEY, JSON.stringify(initial));
       return initial;
     }
     const parsed = JSON.parse(raw) as CommunityOntologyState;
     if (parsed.schemaVersion !== 1) {
-      const fresh = clone(SEED_COMMUNITY_STATE);
+      const fresh = normalizeCommunityState(clone(SEED_COMMUNITY_STATE));
       localStorage.setItem(COMMUNITY_STORAGE_KEY, JSON.stringify(fresh));
       return fresh;
     }
-    return parsed;
+    const normalized = normalizeCommunityState(parsed);
+    return normalized;
   } catch {
-    return clone(SEED_COMMUNITY_STATE);
+    return normalizeCommunityState(clone(SEED_COMMUNITY_STATE));
   }
 }
 

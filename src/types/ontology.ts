@@ -24,6 +24,7 @@ export interface LiveTelemetry {
   driverId: string;
   latitude: number;
   longitude: number;
+  /** Speed in mph (MVP convention for privacy “driving” threshold). */
   speed: number;
   heading: number;
   timestamp: string;

@@ -48,6 +48,10 @@ export const communityOntologyService = {
         | "profileImageUrl"
         | "carInterests"
         | "currentVehicleId"
+        | "telemetryDriverId"
+        | "locationShareEnabled"
+        | "locationShareWhenDrivingOnly"
+        | "locationShareFriendsOnly"
       >
     >,
   ): void {

@@ -1,0 +1,302 @@
+[
+  {
+    "id": "drv-syn-001",
+    "username": "2JZWhisperer",
+    "vehicleId": "veh-syn-001",
+    "eloRating": 1642
+  },
+  {
+    "id": "drv-syn-002",
+    "username": "GodzillaGrip",
+    "vehicleId": "veh-syn-002",
+    "eloRating": 1987
+  },
+  {
+    "id": "drv-syn-003",
+    "username": "VtecSociety",
+    "vehicleId": "veh-syn-003",
+    "eloRating": 1420
+  },
+  {
+    "id": "drv-syn-004",
+    "username": "RotaryKing",
+    "vehicleId": "veh-syn-004",
+    "eloRating": 1588
+  },
+  {
+    "id": "drv-syn-005",
+    "username": "BoostedBoxer",
+    "vehicleId": "veh-syn-005",
+    "eloRating": 1311
+  },
+  {
+    "id": "drv-syn-006",
+    "username": "EvoTrackRat",
+    "vehicleId": "veh-syn-006",
+    "eloRating": 1495
+  },
+  {
+    "id": "drv-syn-007",
+    "username": "V8Touge",
+    "vehicleId": "veh-syn-007",
+    "eloRating": 1366
+  },
+  {
+    "id": "drv-syn-008",
+    "username": "HybridHunter",
+    "vehicleId": "veh-syn-008",
+    "eloRating": 2012
+  },
+  {
+    "id": "drv-syn-009",
+    "username": "ThreeCylinderTerror",
+    "vehicleId": "veh-syn-009",
+    "eloRating": 1274
+  },
+  {
+    "id": "drv-syn-010",
+    "username": "FairladyFlyby",
+    "vehicleId": "veh-syn-010",
+    "eloRating": 1398
+  },
+  {
+    "id": "drv-syn-011",
+    "username": "ApexHunter",
+    "vehicleId": "veh-syn-011",
+    "eloRating": 1723
+  },
+  {
+    "id": "drv-syn-012",
+    "username": "MiataIsAlwaysAnswer",
+    "vehicleId": "veh-syn-012",
+    "eloRating": 1129
+  },
+  {
+    "id": "drv-syn-013",
+    "username": "DriftPanda",
+    "vehicleId": "veh-syn-013",
+    "eloRating": 1044
+  },
+  {
+    "id": "drv-syn-014",
+    "username": "TwinTurboTea",
+    "vehicleId": "veh-syn-014",
+    "eloRating": 1188
+  },
+  {
+    "id": "drv-syn-015",
+    "username": "NaturallyAspirated",
+    "vehicleId": "veh-syn-015",
+    "eloRating": 1247
+  },
+  {
+    "id": "drv-syn-016",
+    "username": "TougePhantom",
+    "vehicleId": "veh-syn-016",
+    "eloRating": 1456
+  },
+  {
+    "id": "drv-syn-017",
+    "username": "ActiveAeroAndy",
+    "vehicleId": "veh-syn-017",
+    "eloRating": 987
+  },
+  {
+    "id": "drv-syn-018",
+    "username": "RingRat",
+    "vehicleId": "veh-syn-018",
+    "eloRating": 1884
+  },
+  {
+    "id": "drv-syn-019",
+    "username": "CarbonCreep",
+    "vehicleId": "veh-syn-019",
+    "eloRating": 2120
+  },
+  {
+    "id": "drv-syn-020",
+    "username": "WingThing",
+    "vehicleId": "veh-syn-020",
+    "eloRating": 2341
+  },
+  {
+    "id": "drv-syn-021",
+    "username": "MidEngineMenace",
+    "vehicleId": "veh-syn-021",
+    "eloRating": 2198
+  },
+  {
+    "id": "drv-syn-022",
+    "username": "FiveCylinderFiend",
+    "vehicleId": "veh-syn-022",
+    "eloRating": 1566
+  },
+  {
+    "id": "drv-syn-023",
+    "username": "QuattroQueen",
+    "vehicleId": "veh-syn-023",
+    "eloRating": 2066
+  },
+  {
+    "id": "drv-syn-024",
+    "username": "BiturboBaron",
+    "vehicleId": "veh-syn-024",
+    "eloRating": 1677
+  },
+  {
+    "id": "drv-syn-025",
+    "username": "Panamericana",
+    "vehicleId": "veh-syn-025",
+    "eloRating": 1923
+  },
+  {
+    "id": "drv-syn-026",
+    "username": "HatchbackHooligan",
+    "vehicleId": "veh-syn-026",
+    "eloRating": 1289
+  },
+  {
+    "id": "drv-syn-027",
+    "username": "ShortWheelbase",
+    "vehicleId": "veh-syn-027",
+    "eloRating": 1744
+  },
+  {
+    "id": "drv-syn-028",
+    "username": "WagonWednesday",
+    "vehicleId": "veh-syn-028",
+    "eloRating": 1811
+  },
+  {
+    "id": "drv-syn-029",
+    "username": "SleeperEstate",
+    "vehicleId": "veh-syn-029",
+    "eloRating": 1699
+  },
+  {
+    "id": "drv-syn-030",
+    "username": "SilentLaunch",
+    "vehicleId": "veh-syn-030",
+    "eloRating": 1988
+  },
+  {
+    "id": "drv-syn-031",
+    "username": "ItalianStallion",
+    "vehicleId": "veh-syn-031",
+    "eloRating": 1522
+  },
+  {
+    "id": "drv-syn-032",
+    "username": "LightIsRight",
+    "vehicleId": "veh-syn-032",
+    "eloRating": 1788
+  },
+  {
+    "id": "drv-syn-033",
+    "username": "BondNotIncluded",
+    "vehicleId": "veh-syn-033",
+    "eloRating": 1855
+  },
+  {
+    "id": "drv-syn-034",
+    "username": "TorqueVectorTom",
+    "vehicleId": "veh-syn-034",
+    "eloRating": 1411
+  },
+  {
+    "id": "drv-syn-035",
+    "username": "CoyoteHowl",
+    "vehicleId": "veh-syn-035",
+    "eloRating": 1333
+  },
+  {
+    "id": "drv-syn-036",
+    "username": "BoostedV8",
+    "vehicleId": "veh-syn-036",
+    "eloRating": 2089
+  },
+  {
+    "id": "drv-syn-037",
+    "username": "WidebodyWednesday",
+    "vehicleId": "veh-syn-037",
+    "eloRating": 1655
+  },
+  {
+    "id": "drv-syn-038",
+    "username": "FourDoorFury",
+    "vehicleId": "veh-syn-038",
+    "eloRating": 1220
+  },
+  {
+    "id": "drv-syn-039",
+    "username": "LSswapLater",
+    "vehicleId": "veh-syn-039",
+    "eloRating": 1388
+  },
+  {
+    "id": "drv-syn-040",
+    "username": "SuperchargedSam",
+    "vehicleId": "veh-syn-040",
+    "eloRating": 1892
+  },
+  {
+    "id": "drv-syn-041",
+    "username": "StingraySteve",
+    "vehicleId": "veh-syn-041",
+    "eloRating": 1966
+  },
+  {
+    "id": "drv-syn-042",
+    "username": "FlatPlaneCrank",
+    "vehicleId": "veh-syn-042",
+    "eloRating": 2488
+  },
+  {
+    "id": "drv-syn-043",
+    "username": "LuxuryBurnout",
+    "vehicleId": "veh-syn-043",
+    "eloRating": 1712
+  },
+  {
+    "id": "drv-syn-044",
+    "username": "SUVFromHell",
+    "vehicleId": "veh-syn-044",
+    "eloRating": 1544
+  },
+  {
+    "id": "drv-syn-045",
+    "username": "LudicrousMode",
+    "vehicleId": "veh-syn-045",
+    "eloRating": 2234
+  },
+  {
+    "id": "drv-syn-046",
+    "username": "DesertRunner",
+    "vehicleId": "veh-syn-046",
+    "eloRating": 1199
+  },
+  {
+    "id": "drv-syn-047",
+    "username": "RedeyeRick",
+    "vehicleId": "veh-syn-047",
+    "eloRating": 1876
+  },
+  {
+    "id": "drv-syn-048",
+    "username": "ShakerHood",
+    "vehicleId": "veh-syn-048",
+    "eloRating": 1467
+  },
+  {
+    "id": "drv-syn-049",
+    "username": "TruckYeah",
+    "vehicleId": "veh-syn-049",
+    "eloRating": 892
+  },
+  {
+    "id": "drv-syn-050",
+    "username": "FamilyCarMyFoot",
+    "vehicleId": "veh-syn-050",
+    "eloRating": 512
+  }
+]

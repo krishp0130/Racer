@@ -1,0 +1,402 @@
+[
+  {
+    "id": "veh-syn-001",
+    "make": "Toyota",
+    "model": "GR Supra 3.0",
+    "year": 2023,
+    "horsepower": 382,
+    "class": "JDM"
+  },
+  {
+    "id": "veh-syn-002",
+    "make": "Nissan",
+    "model": "GT-R Nismo",
+    "year": 2021,
+    "horsepower": 600,
+    "class": "JDM"
+  },
+  {
+    "id": "veh-syn-003",
+    "make": "Honda",
+    "model": "Civic Type R",
+    "year": 2023,
+    "horsepower": 315,
+    "class": "JDM"
+  },
+  {
+    "id": "veh-syn-004",
+    "make": "Mazda",
+    "model": "RX-7 Spirit R",
+    "year": 2002,
+    "horsepower": 276,
+    "class": "JDM"
+  },
+  {
+    "id": "veh-syn-005",
+    "make": "Subaru",
+    "model": "WRX STI",
+    "year": 2019,
+    "horsepower": 310,
+    "class": "JDM"
+  },
+  {
+    "id": "veh-syn-006",
+    "make": "Mitsubishi",
+    "model": "Lancer Evolution X",
+    "year": 2015,
+    "horsepower": 291,
+    "class": "JDM"
+  },
+  {
+    "id": "veh-syn-007",
+    "make": "Lexus",
+    "model": "RC F",
+    "year": 2020,
+    "horsepower": 472,
+    "class": "JDM"
+  },
+  {
+    "id": "veh-syn-008",
+    "make": "Acura",
+    "model": "NSX",
+    "year": 2019,
+    "horsepower": 573,
+    "class": "JDM"
+  },
+  {
+    "id": "veh-syn-009",
+    "make": "Toyota",
+    "model": "GR Corolla Circuit",
+    "year": 2024,
+    "horsepower": 300,
+    "class": "JDM"
+  },
+  {
+    "id": "veh-syn-010",
+    "make": "Nissan",
+    "model": "Z Performance",
+    "year": 2023,
+    "horsepower": 400,
+    "class": "JDM"
+  },
+  {
+    "id": "veh-syn-011",
+    "make": "Honda",
+    "model": "S2000",
+    "year": 2008,
+    "horsepower": 237,
+    "class": "JDM"
+  },
+  {
+    "id": "veh-syn-012",
+    "make": "Mazda",
+    "model": "MX-5 Miata",
+    "year": 2022,
+    "horsepower": 205,
+    "class": "JDM"
+  },
+  {
+    "id": "veh-syn-013",
+    "make": "Subaru",
+    "model": "BRZ tS",
+    "year": 2024,
+    "horsepower": 228,
+    "class": "JDM"
+  },
+  {
+    "id": "veh-syn-014",
+    "make": "Infiniti",
+    "model": "Q60 Red Sport 400",
+    "year": 2022,
+    "horsepower": 400,
+    "class": "JDM"
+  },
+  {
+    "id": "veh-syn-015",
+    "make": "Lexus",
+    "model": "IS 500 F Sport",
+    "year": 2023,
+    "horsepower": 472,
+    "class": "JDM"
+  },
+  {
+    "id": "veh-syn-016",
+    "make": "Toyota",
+    "model": "GR86 Premium",
+    "year": 2023,
+    "horsepower": 228,
+    "class": "JDM"
+  },
+  {
+    "id": "veh-syn-017",
+    "make": "Mitsubishi",
+    "model": "3000GT VR-4",
+    "year": 1999,
+    "horsepower": 320,
+    "class": "JDM"
+  },
+  {
+    "id": "veh-syn-018",
+    "make": "BMW",
+    "model": "M3 Competition",
+    "year": 2023,
+    "horsepower": 503,
+    "class": "Euro"
+  },
+  {
+    "id": "veh-syn-019",
+    "make": "BMW",
+    "model": "M4 CSL",
+    "year": 2023,
+    "horsepower": 543,
+    "class": "Euro"
+  },
+  {
+    "id": "veh-syn-020",
+    "make": "Porsche",
+    "model": "911 GT3 RS",
+    "year": 2023,
+    "horsepower": 518,
+    "class": "Euro"
+  },
+  {
+    "id": "veh-syn-021",
+    "make": "Porsche",
+    "model": "718 Cayman GT4 RS",
+    "year": 2022,
+    "horsepower": 493,
+    "class": "Euro"
+  },
+  {
+    "id": "veh-syn-022",
+    "make": "Audi",
+    "model": "RS3",
+    "year": 2023,
+    "horsepower": 401,
+    "class": "Euro"
+  },
+  {
+    "id": "veh-syn-023",
+    "make": "Audi",
+    "model": "R8 V10 Performance",
+    "year": 2022,
+    "horsepower": 602,
+    "class": "Euro"
+  },
+  {
+    "id": "veh-syn-024",
+    "make": "Mercedes-Benz",
+    "model": "AMG C63 S",
+    "year": 2020,
+    "horsepower": 503,
+    "class": "Euro"
+  },
+  {
+    "id": "veh-syn-025",
+    "make": "Mercedes-Benz",
+    "model": "AMG GT 63 S",
+    "year": 2022,
+    "horsepower": 630,
+    "class": "Euro"
+  },
+  {
+    "id": "veh-syn-026",
+    "make": "Volkswagen",
+    "model": "Golf R",
+    "year": 2023,
+    "horsepower": 315,
+    "class": "Euro"
+  },
+  {
+    "id": "veh-syn-027",
+    "make": "BMW",
+    "model": "M2 Competition",
+    "year": 2020,
+    "horsepower": 405,
+    "class": "Euro"
+  },
+  {
+    "id": "veh-syn-028",
+    "make": "Audi",
+    "model": "RS6 Avant",
+    "year": 2023,
+    "horsepower": 591,
+    "class": "Euro"
+  },
+  {
+    "id": "veh-syn-029",
+    "make": "Mercedes-Benz",
+    "model": "E63 S AMG",
+    "year": 2021,
+    "horsepower": 603,
+    "class": "Euro"
+  },
+  {
+    "id": "veh-syn-030",
+    "make": "Porsche",
+    "model": "Taycan Turbo S",
+    "year": 2023,
+    "horsepower": 750,
+    "class": "Euro"
+  },
+  {
+    "id": "veh-syn-031",
+    "make": "Alfa Romeo",
+    "model": "Giulia Quadrifoglio",
+    "year": 2022,
+    "horsepower": 505,
+    "class": "Euro"
+  },
+  {
+    "id": "veh-syn-032",
+    "make": "Lotus",
+    "model": "Emira V6 First Edition",
+    "year": 2023,
+    "horsepower": 400,
+    "class": "Euro"
+  },
+  {
+    "id": "veh-syn-033",
+    "make": "Aston Martin",
+    "model": "Vantage",
+    "year": 2021,
+    "horsepower": 503,
+    "class": "Euro"
+  },
+  {
+    "id": "veh-syn-034",
+    "make": "BMW",
+    "model": "i4 M50",
+    "year": 2023,
+    "horsepower": 536,
+    "class": "Euro"
+  },
+  {
+    "id": "veh-syn-035",
+    "make": "Ford",
+    "model": "Mustang GT",
+    "year": 2022,
+    "horsepower": 450,
+    "class": "Muscle"
+  },
+  {
+    "id": "veh-syn-036",
+    "make": "Ford",
+    "model": "Mustang Shelby GT500",
+    "year": 2022,
+    "horsepower": 760,
+    "class": "Muscle"
+  },
+  {
+    "id": "veh-syn-037",
+    "make": "Dodge",
+    "model": "Challenger SRT Hellcat",
+    "year": 2021,
+    "horsepower": 717,
+    "class": "Muscle"
+  },
+  {
+    "id": "veh-syn-038",
+    "make": "Dodge",
+    "model": "Charger Scat Pack Widebody",
+    "year": 2023,
+    "horsepower": 485,
+    "class": "Muscle"
+  },
+  {
+    "id": "veh-syn-039",
+    "make": "Chevrolet",
+    "model": "Camaro SS 1LE",
+    "year": 2020,
+    "horsepower": 455,
+    "class": "Muscle"
+  },
+  {
+    "id": "veh-syn-040",
+    "make": "Chevrolet",
+    "model": "Camaro ZL1",
+    "year": 2022,
+    "horsepower": 650,
+    "class": "Muscle"
+  },
+  {
+    "id": "veh-syn-041",
+    "make": "Chevrolet",
+    "model": "Corvette Stingray",
+    "year": 2023,
+    "horsepower": 495,
+    "class": "Muscle"
+  },
+  {
+    "id": "veh-syn-042",
+    "make": "Chevrolet",
+    "model": "Corvette Z06",
+    "year": 2023,
+    "horsepower": 670,
+    "class": "Muscle"
+  },
+  {
+    "id": "veh-syn-043",
+    "make": "Cadillac",
+    "model": "CT5-V Blackwing",
+    "year": 2023,
+    "horsepower": 668,
+    "class": "Muscle"
+  },
+  {
+    "id": "veh-syn-044",
+    "make": "Jeep",
+    "model": "Grand Cherokee Trackhawk",
+    "year": 2021,
+    "horsepower": 707,
+    "class": "Muscle"
+  },
+  {
+    "id": "veh-syn-045",
+    "make": "Tesla",
+    "model": "Model S Plaid",
+    "year": 2023,
+    "horsepower": 1000,
+    "class": "Muscle"
+  },
+  {
+    "id": "veh-syn-046",
+    "make": "Ford",
+    "model": "F-150 Raptor R",
+    "year": 2023,
+    "horsepower": 700,
+    "class": "Muscle"
+  },
+  {
+    "id": "veh-syn-047",
+    "make": "Dodge",
+    "model": "Charger SRT Hellcat Redeye",
+    "year": 2022,
+    "horsepower": 797,
+    "class": "Muscle"
+  },
+  {
+    "id": "veh-syn-048",
+    "make": "Ford",
+    "model": "Mustang Mach 1",
+    "year": 2021,
+    "horsepower": 480,
+    "class": "Muscle"
+  },
+  {
+    "id": "veh-syn-049",
+    "make": "Chevrolet",
+    "model": "Silverado RST",
+    "year": 2022,
+    "horsepower": 420,
+    "class": "Muscle"
+  },
+  {
+    "id": "veh-syn-050",
+    "make": "Dodge",
+    "model": "Durango SRT Hellcat",
+    "year": 2021,
+    "horsepower": 710,
+    "class": "Muscle"
+  }
+]

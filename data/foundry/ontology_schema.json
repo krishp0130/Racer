@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Racer Foundry export — object shapes",
+  "description": "Aligns with src/types/ontology.ts Driver, Vehicle, Race (+ HistoricalRace timestamps).",
+  "definitions": {
+    "Driver": {
+      "type": "object",
+      "required": [
+        "id",
+        "username",
+        "vehicleId",
+        "eloRating"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Primary key; links LiveTelemetry.driverId"
+        },
+        "username": {
+          "type": "string"
+        },
+        "vehicleId": {
+          "type": "string",
+          "description": "FK → Vehicle.id"
+        },
+        "eloRating": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "Vehicle": {
+      "type": "object",
+      "required": [
+        "id",
+        "make",
+        "model",
+        "year",
+        "horsepower",
+        "class"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "make": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "year": {
+          "type": "integer"
+        },
+        "horsepower": {
+          "type": "number"
+        },
+        "class": {
+          "type": "string",
+          "description": "e.g. JDM, Euro, Muscle"
+        }
+      },
+      "additionalProperties": false
+    },
+    "HistoricalRace": {
+      "type": "object",
+      "required": [
+        "id",
+        "status",
+        "participants",
+        "startCoords",
+        "finishCoords",
+        "winnerId",
+        "startTime",
+        "endTime"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "status": {
+          "const": "finished"
+        },
+        "participants": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "startCoords": {
+          "type": "object",
+          "required": [
+            "latitude",
+            "longitude"
+          ],
+          "properties": {
+            "latitude": {
+              "type": "number"
+            },
+            "longitude": {
+              "type": "number"
+            }
+          }
+        },
+        "finishCoords": {
+          "type": "object",
+          "required": [
+            "latitude",
+            "longitude"
+          ],
+          "properties": {
+            "latitude": {
+              "type": "number"
+            },
+            "longitude": {
+              "type": "number"
+            }
+          }
+        },
+        "winnerId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

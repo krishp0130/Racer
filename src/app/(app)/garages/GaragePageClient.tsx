@@ -5,6 +5,7 @@ import { GarageImage } from "@/components/media/GarageImage";
 import { useCommunity } from "@/hooks/useCommunity";
 import { communityOntologyService } from "@/services/communityOntologyService";
 import { exportCommunityJson, loadCommunityState } from "@/lib/communityStore";
+import { MIN_DRIVING_SPEED_MPH } from "@/lib/locationSharing";
 import type { GarageVehicle } from "@/types/communityOntology";
 
 type Tab = "profile" | "garage" | "export";
@@ -229,6 +230,121 @@ export function GaragePageClient() {
                   </option>
                 ))}
               </select>
+            </div>
+
+            <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6">
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-[var(--muted)]">
+                Location & radar
+              </h2>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
+                Controls whether other drivers can see you on nearby radar when
+                your telemetry is in range. “Driving” uses live speed (mph) from
+                telemetry — currently hidden below {MIN_DRIVING_SPEED_MPH} mph.
+              </p>
+              {me.telemetryDriverId ? (
+                <p className="mt-2 text-[0.65rem] text-[var(--muted)]">
+                  Linked driver id:{" "}
+                  <code className="rounded bg-[var(--surface-elevated)] px-1 text-[var(--accent)]">
+                    {me.telemetryDriverId}
+                  </code>
+                </p>
+              ) : (
+                <p className="mt-2 text-[0.65rem] text-[var(--muted)]">
+                  No radar driver link — privacy rules apply only when an admin
+                  maps your profile to a Foundry driver id.
+                </p>
+              )}
+
+              <fieldset className="mt-4 space-y-3">
+                <legend className="sr-only">Location sharing mode</legend>
+                {(
+                  [
+                    {
+                      value: "off" as const,
+                      label: "Hidden",
+                      hint: "Never show my position to others on radar.",
+                    },
+                    {
+                      value: "always" as const,
+                      label: "Always when sharing is on",
+                      hint: "Visible whenever telemetry is in range.",
+                    },
+                    {
+                      value: "driving" as const,
+                      label: "Only while driving",
+                      hint: `Visible only at ≥ ${MIN_DRIVING_SPEED_MPH} mph.`,
+                    },
+                  ] as const
+                ).map((opt) => {
+                  const mode = !me.locationShareEnabled
+                    ? "off"
+                    : me.locationShareWhenDrivingOnly
+                      ? "driving"
+                      : "always";
+                  return (
+                    <label
+                      key={opt.value}
+                      className="flex cursor-pointer gap-3 rounded-xl border border-[var(--border)] bg-[var(--background)] p-3 has-[:checked]:border-[var(--accent-soft)] has-[:checked]:bg-[var(--accent-glow)]/30"
+                    >
+                      <input
+                        type="radio"
+                        name="locationShareMode"
+                        className="mt-1"
+                        checked={mode === opt.value}
+                        onChange={() => {
+                          if (opt.value === "off") {
+                            updateProfile({
+                              locationShareEnabled: false,
+                              locationShareWhenDrivingOnly: false,
+                            });
+                          } else if (opt.value === "always") {
+                            updateProfile({
+                              locationShareEnabled: true,
+                              locationShareWhenDrivingOnly: false,
+                            });
+                          } else {
+                            updateProfile({
+                              locationShareEnabled: true,
+                              locationShareWhenDrivingOnly: true,
+                            });
+                          }
+                        }}
+                      />
+                      <span>
+                        <span className="block text-sm font-semibold text-[var(--foreground)]">
+                          {opt.label}
+                        </span>
+                        <span className="mt-0.5 block text-xs text-[var(--muted)]">
+                          {opt.hint}
+                        </span>
+                      </span>
+                    </label>
+                  );
+                })}
+              </fieldset>
+
+              <label className="mt-4 flex cursor-pointer gap-3 rounded-xl border border-[var(--border)] bg-[var(--background)] p-3">
+                <input
+                  type="checkbox"
+                  className="mt-1"
+                  checked={me.locationShareFriendsOnly}
+                  disabled={!me.locationShareEnabled}
+                  onChange={(e) =>
+                    updateProfile({
+                      locationShareFriendsOnly: e.target.checked,
+                    })
+                  }
+                />
+                <span>
+                  <span className="block text-sm font-semibold text-[var(--foreground)]">
+                    Friends only
+                  </span>
+                  <span className="mt-0.5 block text-xs text-[var(--muted)]">
+                    Only accepted friends see you (still respects driving-only
+                    if that mode is on).
+                  </span>
+                </span>
+              </label>
             </div>
           </div>
         </div>

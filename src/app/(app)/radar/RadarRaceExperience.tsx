@@ -12,6 +12,7 @@ import Map, { Marker } from "react-map-gl/maplibre";
 import maplibregl from "maplibre-gl";
 import type { LngLat } from "@/lib/geo";
 import { haversineMeters, interpolateToward, metersToMiles } from "@/lib/geo";
+import { useSyntheticFleetTelemetry } from "@/hooks/useSyntheticFleetTelemetry";
 import {
   bundleFromMatch,
   getDefaultOpponentBundle,
@@ -44,6 +45,8 @@ function formatMiles(meters: number): string {
 }
 
 export default function RadarRaceExperience() {
+  const syntheticFleet = useSyntheticFleetTelemetry(INITIAL_CENTER, 10);
+
   const [phase, setPhase] = useState<Phase>("browsing");
   const [opponent, setOpponent] = useState<OpponentBundle>(() =>
     getDefaultOpponentBundle(),
@@ -271,6 +274,27 @@ export default function RadarRaceExperience() {
           cursor={mapCursor}
           attributionControl={false}
         >
+          {Object.entries(syntheticFleet.telemetryByDriverId).map(
+            ([driverId, t]) => (
+              <Marker
+                key={driverId}
+                longitude={t.longitude}
+                latitude={t.latitude}
+                anchor="center"
+              >
+                <div
+                  className="pointer-events-none flex flex-col items-center gap-0.5"
+                  title={`@${syntheticFleet.usernamesByDriverId[driverId] ?? driverId} · ${Math.round(t.speed)} mph`}
+                >
+                  <span className="h-2.5 w-2.5 rounded-full border border-emerald-400/90 bg-emerald-500 shadow-[0_0_12px_rgba(52,211,153,0.7)]" />
+                  <span className="max-w-[72px] truncate rounded bg-black/55 px-1 py-px text-[0.5rem] font-medium text-emerald-100/95">
+                    {syntheticFleet.usernamesByDriverId[driverId] ?? driverId}
+                  </span>
+                </div>
+              </Marker>
+            ),
+          )}
+
           <Marker
             longitude={opponent.position.longitude}
             latitude={opponent.position.latitude}
@@ -283,7 +307,7 @@ export default function RadarRaceExperience() {
                 e.stopPropagation();
                 openOpponent();
               }}
-              className="relative flex h-11 w-11 items-center justify-center rounded-full border-2 border-[var(--accent)] bg-[color-mix(in_oklab,var(--surface-elevated)_82%,transparent)] shadow-[0_0_28px_var(--accent-soft)] backdrop-blur-md transition-[transform,opacity] active:scale-95 enabled:hover:brightness-110 disabled:pointer-events-none disabled:opacity-35"
+              className="relative z-[1] flex h-11 w-11 items-center justify-center rounded-full border-2 border-[var(--accent)] bg-[color-mix(in_oklab,var(--surface-elevated)_82%,transparent)] shadow-[0_0_28px_var(--accent-soft)] backdrop-blur-md transition-[transform,opacity] active:scale-95 enabled:hover:brightness-110 disabled:pointer-events-none disabled:opacity-35"
               aria-label={`Open ${opponent.username} profile`}
             >
               <span className="absolute inset-0 animate-ping rounded-full bg-[var(--accent)] opacity-20" />

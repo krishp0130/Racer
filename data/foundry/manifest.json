@@ -1,0 +1,56 @@
+{
+  "exportVersion": "1.0.0",
+  "generatedAt": "2026-03-23T01:46:12.261Z",
+  "description": "Synthetic Racer data for Palantir Foundry datasets and AIP tools (matchmaking, analytics).",
+  "files": [
+    {
+      "path": "drivers.json",
+      "objectType": "Driver",
+      "rowCount": 50,
+      "primaryKey": "id"
+    },
+    {
+      "path": "vehicles.json",
+      "objectType": "Vehicle",
+      "rowCount": 50,
+      "primaryKey": "id"
+    },
+    {
+      "path": "driver_vehicle_assignments.json",
+      "objectType": "Join / denormalized row",
+      "rowCount": 50,
+      "note": "Convenience for pipelines; FK driverId → drivers, vehicleId → vehicles"
+    },
+    {
+      "path": "races_completed.json",
+      "objectType": "Race",
+      "rowCount": 500,
+      "primaryKey": "id",
+      "note": "Strict HistoricalRace (Ontology Race + ISO startTime/endTime)"
+    },
+    {
+      "path": "races_completed_analytics.json",
+      "objectType": "Race",
+      "rowCount": 500,
+      "primaryKey": "id",
+      "note": "Adds durationSeconds, loserDriverId for dashboards and AIP"
+    },
+    {
+      "path": "races_completed_analytics.ndjson",
+      "objectType": "Race",
+      "rowCount": 500,
+      "format": "newline-delimited JSON",
+      "note": "One JSON object per line — common Foundry bulk ingest"
+    },
+    {
+      "path": "racer_foundry_bundle.json",
+      "objectType": "Bundle",
+      "note": "Single-file snapshot: drivers + vehicles + assignments + races (analytics shape)"
+    },
+    {
+      "path": "ontology_schema.json",
+      "objectType": "JSON Schema",
+      "note": "Documents Driver, Vehicle, HistoricalRace field shapes"
+    }
+  ]
+}

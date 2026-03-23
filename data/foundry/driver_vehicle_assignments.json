@@ -1,0 +1,452 @@
+[
+  {
+    "driverId": "drv-syn-001",
+    "vehicleId": "veh-syn-001",
+    "username": "2JZWhisperer",
+    "vehicleLabel": "2023 Toyota GR Supra 3.0",
+    "vehicleClass": "JDM",
+    "eloRating": 1642,
+    "horsepower": 382
+  },
+  {
+    "driverId": "drv-syn-002",
+    "vehicleId": "veh-syn-002",
+    "username": "GodzillaGrip",
+    "vehicleLabel": "2021 Nissan GT-R Nismo",
+    "vehicleClass": "JDM",
+    "eloRating": 1987,
+    "horsepower": 600
+  },
+  {
+    "driverId": "drv-syn-003",
+    "vehicleId": "veh-syn-003",
+    "username": "VtecSociety",
+    "vehicleLabel": "2023 Honda Civic Type R",
+    "vehicleClass": "JDM",
+    "eloRating": 1420,
+    "horsepower": 315
+  },
+  {
+    "driverId": "drv-syn-004",
+    "vehicleId": "veh-syn-004",
+    "username": "RotaryKing",
+    "vehicleLabel": "2002 Mazda RX-7 Spirit R",
+    "vehicleClass": "JDM",
+    "eloRating": 1588,
+    "horsepower": 276
+  },
+  {
+    "driverId": "drv-syn-005",
+    "vehicleId": "veh-syn-005",
+    "username": "BoostedBoxer",
+    "vehicleLabel": "2019 Subaru WRX STI",
+    "vehicleClass": "JDM",
+    "eloRating": 1311,
+    "horsepower": 310
+  },
+  {
+    "driverId": "drv-syn-006",
+    "vehicleId": "veh-syn-006",
+    "username": "EvoTrackRat",
+    "vehicleLabel": "2015 Mitsubishi Lancer Evolution X",
+    "vehicleClass": "JDM",
+    "eloRating": 1495,
+    "horsepower": 291
+  },
+  {
+    "driverId": "drv-syn-007",
+    "vehicleId": "veh-syn-007",
+    "username": "V8Touge",
+    "vehicleLabel": "2020 Lexus RC F",
+    "vehicleClass": "JDM",
+    "eloRating": 1366,
+    "horsepower": 472
+  },
+  {
+    "driverId": "drv-syn-008",
+    "vehicleId": "veh-syn-008",
+    "username": "HybridHunter",
+    "vehicleLabel": "2019 Acura NSX",
+    "vehicleClass": "JDM",
+    "eloRating": 2012,
+    "horsepower": 573
+  },
+  {
+    "driverId": "drv-syn-009",
+    "vehicleId": "veh-syn-009",
+    "username": "ThreeCylinderTerror",
+    "vehicleLabel": "2024 Toyota GR Corolla Circuit",
+    "vehicleClass": "JDM",
+    "eloRating": 1274,
+    "horsepower": 300
+  },
+  {
+    "driverId": "drv-syn-010",
+    "vehicleId": "veh-syn-010",
+    "username": "FairladyFlyby",
+    "vehicleLabel": "2023 Nissan Z Performance",
+    "vehicleClass": "JDM",
+    "eloRating": 1398,
+    "horsepower": 400
+  },
+  {
+    "driverId": "drv-syn-011",
+    "vehicleId": "veh-syn-011",
+    "username": "ApexHunter",
+    "vehicleLabel": "2008 Honda S2000",
+    "vehicleClass": "JDM",
+    "eloRating": 1723,
+    "horsepower": 237
+  },
+  {
+    "driverId": "drv-syn-012",
+    "vehicleId": "veh-syn-012",
+    "username": "MiataIsAlwaysAnswer",
+    "vehicleLabel": "2022 Mazda MX-5 Miata",
+    "vehicleClass": "JDM",
+    "eloRating": 1129,
+    "horsepower": 205
+  },
+  {
+    "driverId": "drv-syn-013",
+    "vehicleId": "veh-syn-013",
+    "username": "DriftPanda",
+    "vehicleLabel": "2024 Subaru BRZ tS",
+    "vehicleClass": "JDM",
+    "eloRating": 1044,
+    "horsepower": 228
+  },
+  {
+    "driverId": "drv-syn-014",
+    "vehicleId": "veh-syn-014",
+    "username": "TwinTurboTea",
+    "vehicleLabel": "2022 Infiniti Q60 Red Sport 400",
+    "vehicleClass": "JDM",
+    "eloRating": 1188,
+    "horsepower": 400
+  },
+  {
+    "driverId": "drv-syn-015",
+    "vehicleId": "veh-syn-015",
+    "username": "NaturallyAspirated",
+    "vehicleLabel": "2023 Lexus IS 500 F Sport",
+    "vehicleClass": "JDM",
+    "eloRating": 1247,
+    "horsepower": 472
+  },
+  {
+    "driverId": "drv-syn-016",
+    "vehicleId": "veh-syn-016",
+    "username": "TougePhantom",
+    "vehicleLabel": "2023 Toyota GR86 Premium",
+    "vehicleClass": "JDM",
+    "eloRating": 1456,
+    "horsepower": 228
+  },
+  {
+    "driverId": "drv-syn-017",
+    "vehicleId": "veh-syn-017",
+    "username": "ActiveAeroAndy",
+    "vehicleLabel": "1999 Mitsubishi 3000GT VR-4",
+    "vehicleClass": "JDM",
+    "eloRating": 987,
+    "horsepower": 320
+  },
+  {
+    "driverId": "drv-syn-018",
+    "vehicleId": "veh-syn-018",
+    "username": "RingRat",
+    "vehicleLabel": "2023 BMW M3 Competition",
+    "vehicleClass": "Euro",
+    "eloRating": 1884,
+    "horsepower": 503
+  },
+  {
+    "driverId": "drv-syn-019",
+    "vehicleId": "veh-syn-019",
+    "username": "CarbonCreep",
+    "vehicleLabel": "2023 BMW M4 CSL",
+    "vehicleClass": "Euro",
+    "eloRating": 2120,
+    "horsepower": 543
+  },
+  {
+    "driverId": "drv-syn-020",
+    "vehicleId": "veh-syn-020",
+    "username": "WingThing",
+    "vehicleLabel": "2023 Porsche 911 GT3 RS",
+    "vehicleClass": "Euro",
+    "eloRating": 2341,
+    "horsepower": 518
+  },
+  {
+    "driverId": "drv-syn-021",
+    "vehicleId": "veh-syn-021",
+    "username": "MidEngineMenace",
+    "vehicleLabel": "2022 Porsche 718 Cayman GT4 RS",
+    "vehicleClass": "Euro",
+    "eloRating": 2198,
+    "horsepower": 493
+  },
+  {
+    "driverId": "drv-syn-022",
+    "vehicleId": "veh-syn-022",
+    "username": "FiveCylinderFiend",
+    "vehicleLabel": "2023 Audi RS3",
+    "vehicleClass": "Euro",
+    "eloRating": 1566,
+    "horsepower": 401
+  },
+  {
+    "driverId": "drv-syn-023",
+    "vehicleId": "veh-syn-023",
+    "username": "QuattroQueen",
+    "vehicleLabel": "2022 Audi R8 V10 Performance",
+    "vehicleClass": "Euro",
+    "eloRating": 2066,
+    "horsepower": 602
+  },
+  {
+    "driverId": "drv-syn-024",
+    "vehicleId": "veh-syn-024",
+    "username": "BiturboBaron",
+    "vehicleLabel": "2020 Mercedes-Benz AMG C63 S",
+    "vehicleClass": "Euro",
+    "eloRating": 1677,
+    "horsepower": 503
+  },
+  {
+    "driverId": "drv-syn-025",
+    "vehicleId": "veh-syn-025",
+    "username": "Panamericana",
+    "vehicleLabel": "2022 Mercedes-Benz AMG GT 63 S",
+    "vehicleClass": "Euro",
+    "eloRating": 1923,
+    "horsepower": 630
+  },
+  {
+    "driverId": "drv-syn-026",
+    "vehicleId": "veh-syn-026",
+    "username": "HatchbackHooligan",
+    "vehicleLabel": "2023 Volkswagen Golf R",
+    "vehicleClass": "Euro",
+    "eloRating": 1289,
+    "horsepower": 315
+  },
+  {
+    "driverId": "drv-syn-027",
+    "vehicleId": "veh-syn-027",
+    "username": "ShortWheelbase",
+    "vehicleLabel": "2020 BMW M2 Competition",
+    "vehicleClass": "Euro",
+    "eloRating": 1744,
+    "horsepower": 405
+  },
+  {
+    "driverId": "drv-syn-028",
+    "vehicleId": "veh-syn-028",
+    "username": "WagonWednesday",
+    "vehicleLabel": "2023 Audi RS6 Avant",
+    "vehicleClass": "Euro",
+    "eloRating": 1811,
+    "horsepower": 591
+  },
+  {
+    "driverId": "drv-syn-029",
+    "vehicleId": "veh-syn-029",
+    "username": "SleeperEstate",
+    "vehicleLabel": "2021 Mercedes-Benz E63 S AMG",
+    "vehicleClass": "Euro",
+    "eloRating": 1699,
+    "horsepower": 603
+  },
+  {
+    "driverId": "drv-syn-030",
+    "vehicleId": "veh-syn-030",
+    "username": "SilentLaunch",
+    "vehicleLabel": "2023 Porsche Taycan Turbo S",
+    "vehicleClass": "Euro",
+    "eloRating": 1988,
+    "horsepower": 750
+  },
+  {
+    "driverId": "drv-syn-031",
+    "vehicleId": "veh-syn-031",
+    "username": "ItalianStallion",
+    "vehicleLabel": "2022 Alfa Romeo Giulia Quadrifoglio",
+    "vehicleClass": "Euro",
+    "eloRating": 1522,
+    "horsepower": 505
+  },
+  {
+    "driverId": "drv-syn-032",
+    "vehicleId": "veh-syn-032",
+    "username": "LightIsRight",
+    "vehicleLabel": "2023 Lotus Emira V6 First Edition",
+    "vehicleClass": "Euro",
+    "eloRating": 1788,
+    "horsepower": 400
+  },
+  {
+    "driverId": "drv-syn-033",
+    "vehicleId": "veh-syn-033",
+    "username": "BondNotIncluded",
+    "vehicleLabel": "2021 Aston Martin Vantage",
+    "vehicleClass": "Euro",
+    "eloRating": 1855,
+    "horsepower": 503
+  },
+  {
+    "driverId": "drv-syn-034",
+    "vehicleId": "veh-syn-034",
+    "username": "TorqueVectorTom",
+    "vehicleLabel": "2023 BMW i4 M50",
+    "vehicleClass": "Euro",
+    "eloRating": 1411,
+    "horsepower": 536
+  },
+  {
+    "driverId": "drv-syn-035",
+    "vehicleId": "veh-syn-035",
+    "username": "CoyoteHowl",
+    "vehicleLabel": "2022 Ford Mustang GT",
+    "vehicleClass": "Muscle",
+    "eloRating": 1333,
+    "horsepower": 450
+  },
+  {
+    "driverId": "drv-syn-036",
+    "vehicleId": "veh-syn-036",
+    "username": "BoostedV8",
+    "vehicleLabel": "2022 Ford Mustang Shelby GT500",
+    "vehicleClass": "Muscle",
+    "eloRating": 2089,
+    "horsepower": 760
+  },
+  {
+    "driverId": "drv-syn-037",
+    "vehicleId": "veh-syn-037",
+    "username": "WidebodyWednesday",
+    "vehicleLabel": "2021 Dodge Challenger SRT Hellcat",
+    "vehicleClass": "Muscle",
+    "eloRating": 1655,
+    "horsepower": 717
+  },
+  {
+    "driverId": "drv-syn-038",
+    "vehicleId": "veh-syn-038",
+    "username": "FourDoorFury",
+    "vehicleLabel": "2023 Dodge Charger Scat Pack Widebody",
+    "vehicleClass": "Muscle",
+    "eloRating": 1220,
+    "horsepower": 485
+  },
+  {
+    "driverId": "drv-syn-039",
+    "vehicleId": "veh-syn-039",
+    "username": "LSswapLater",
+    "vehicleLabel": "2020 Chevrolet Camaro SS 1LE",
+    "vehicleClass": "Muscle",
+    "eloRating": 1388,
+    "horsepower": 455
+  },
+  {
+    "driverId": "drv-syn-040",
+    "vehicleId": "veh-syn-040",
+    "username": "SuperchargedSam",
+    "vehicleLabel": "2022 Chevrolet Camaro ZL1",
+    "vehicleClass": "Muscle",
+    "eloRating": 1892,
+    "horsepower": 650
+  },
+  {
+    "driverId": "drv-syn-041",
+    "vehicleId": "veh-syn-041",
+    "username": "StingraySteve",
+    "vehicleLabel": "2023 Chevrolet Corvette Stingray",
+    "vehicleClass": "Muscle",
+    "eloRating": 1966,
+    "horsepower": 495
+  },
+  {
+    "driverId": "drv-syn-042",
+    "vehicleId": "veh-syn-042",
+    "username": "FlatPlaneCrank",
+    "vehicleLabel": "2023 Chevrolet Corvette Z06",
+    "vehicleClass": "Muscle",
+    "eloRating": 2488,
+    "horsepower": 670
+  },
+  {
+    "driverId": "drv-syn-043",
+    "vehicleId": "veh-syn-043",
+    "username": "LuxuryBurnout",
+    "vehicleLabel": "2023 Cadillac CT5-V Blackwing",
+    "vehicleClass": "Muscle",
+    "eloRating": 1712,
+    "horsepower": 668
+  },
+  {
+    "driverId": "drv-syn-044",
+    "vehicleId": "veh-syn-044",
+    "username": "SUVFromHell",
+    "vehicleLabel": "2021 Jeep Grand Cherokee Trackhawk",
+    "vehicleClass": "Muscle",
+    "eloRating": 1544,
+    "horsepower": 707
+  },
+  {
+    "driverId": "drv-syn-045",
+    "vehicleId": "veh-syn-045",
+    "username": "LudicrousMode",
+    "vehicleLabel": "2023 Tesla Model S Plaid",
+    "vehicleClass": "Muscle",
+    "eloRating": 2234,
+    "horsepower": 1000
+  },
+  {
+    "driverId": "drv-syn-046",
+    "vehicleId": "veh-syn-046",
+    "username": "DesertRunner",
+    "vehicleLabel": "2023 Ford F-150 Raptor R",
+    "vehicleClass": "Muscle",
+    "eloRating": 1199,
+    "horsepower": 700
+  },
+  {
+    "driverId": "drv-syn-047",
+    "vehicleId": "veh-syn-047",
+    "username": "RedeyeRick",
+    "vehicleLabel": "2022 Dodge Charger SRT Hellcat Redeye",
+    "vehicleClass": "Muscle",
+    "eloRating": 1876,
+    "horsepower": 797
+  },
+  {
+    "driverId": "drv-syn-048",
+    "vehicleId": "veh-syn-048",
+    "username": "ShakerHood",
+    "vehicleLabel": "2021 Ford Mustang Mach 1",
+    "vehicleClass": "Muscle",
+    "eloRating": 1467,
+    "horsepower": 480
+  },
+  {
+    "driverId": "drv-syn-049",
+    "vehicleId": "veh-syn-049",
+    "username": "TruckYeah",
+    "vehicleLabel": "2022 Chevrolet Silverado RST",
+    "vehicleClass": "Muscle",
+    "eloRating": 892,
+    "horsepower": 420
+  },
+  {
+    "driverId": "drv-syn-050",
+    "vehicleId": "veh-syn-050",
+    "username": "FamilyCarMyFoot",
+    "vehicleLabel": "2021 Dodge Durango SRT Hellcat",
+    "vehicleClass": "Muscle",
+    "eloRating": 512,
+    "horsepower": 710
+  }
+]

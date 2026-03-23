@@ -20,6 +20,17 @@ export interface MemberProfile {
   /** Primary daily driver in garage */
   currentVehicleId: string | null;
   createdAt: string;
+  /**
+   * Maps to core Ontology `Driver.id` for radar / `LiveTelemetry.driverId`.
+   * When null, privacy rules do not apply to that driver row (legacy demo drivers).
+   */
+  telemetryDriverId: string | null;
+  /** Master switch: when false, you never appear on others’ nearby radar. */
+  locationShareEnabled: boolean;
+  /** When true (and sharing on), others only see you while `LiveTelemetry.speed` ≥ driving threshold. */
+  locationShareWhenDrivingOnly: boolean;
+  /** When true, only accepted friends see you (still subject to driving rule if both are on). */
+  locationShareFriendsOnly: boolean;
 }
 
 /** Extended vehicle record for garage (beyond core Ontology `Vehicle`). */
