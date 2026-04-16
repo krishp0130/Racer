@@ -15,8 +15,12 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Racer",
-  description: "Live racing radar and telemetry",
+  title: {
+    default: "Racer",
+    template: "%s · Racer",
+  },
+  description:
+    "Map-first racing demo: radar, garage, track logs, crew, leaderboard, and Foundry AIP matchmaker.",
 };
 
 export const viewport: Viewport = {

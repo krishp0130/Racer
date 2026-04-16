@@ -1,0 +1,51 @@
+id,make,model,year,horsepower,class
+veh-syn-001,Toyota,GR Supra 3.0,2023,382,JDM
+veh-syn-002,Nissan,GT-R Nismo,2021,600,JDM
+veh-syn-003,Honda,Civic Type R,2023,315,JDM
+veh-syn-004,Mazda,RX-7 Spirit R,2002,276,JDM
+veh-syn-005,Subaru,WRX STI,2019,310,JDM
+veh-syn-006,Mitsubishi,Lancer Evolution X,2015,291,JDM
+veh-syn-007,Lexus,RC F,2020,472,JDM
+veh-syn-008,Acura,NSX,2019,573,JDM
+veh-syn-009,Toyota,GR Corolla Circuit,2024,300,JDM
+veh-syn-010,Nissan,Z Performance,2023,400,JDM
+veh-syn-011,Honda,S2000,2008,237,JDM
+veh-syn-012,Mazda,MX-5 Miata,2022,205,JDM
+veh-syn-013,Subaru,BRZ tS,2024,228,JDM
+veh-syn-014,Infiniti,Q60 Red Sport 400,2022,400,JDM
+veh-syn-015,Lexus,IS 500 F Sport,2023,472,JDM
+veh-syn-016,Toyota,GR86 Premium,2023,228,JDM
+veh-syn-017,Mitsubishi,3000GT VR-4,1999,320,JDM
+veh-syn-018,BMW,M3 Competition,2023,503,Euro
+veh-syn-019,BMW,M4 CSL,2023,543,Euro
+veh-syn-020,Porsche,911 GT3 RS,2023,518,Euro
+veh-syn-021,Porsche,718 Cayman GT4 RS,2022,493,Euro
+veh-syn-022,Audi,RS3,2023,401,Euro
+veh-syn-023,Audi,R8 V10 Performance,2022,602,Euro
+veh-syn-024,Mercedes-Benz,AMG C63 S,2020,503,Euro
+veh-syn-025,Mercedes-Benz,AMG GT 63 S,2022,630,Euro
+veh-syn-026,Volkswagen,Golf R,2023,315,Euro
+veh-syn-027,BMW,M2 Competition,2020,405,Euro
+veh-syn-028,Audi,RS6 Avant,2023,591,Euro
+veh-syn-029,Mercedes-Benz,E63 S AMG,2021,603,Euro
+veh-syn-030,Porsche,Taycan Turbo S,2023,750,Euro
+veh-syn-031,Alfa Romeo,Giulia Quadrifoglio,2022,505,Euro
+veh-syn-032,Lotus,Emira V6 First Edition,2023,400,Euro
+veh-syn-033,Aston Martin,Vantage,2021,503,Euro
+veh-syn-034,BMW,i4 M50,2023,536,Euro
+veh-syn-035,Ford,Mustang GT,2022,450,Muscle
+veh-syn-036,Ford,Mustang Shelby GT500,2022,760,Muscle
+veh-syn-037,Dodge,Challenger SRT Hellcat,2021,717,Muscle
+veh-syn-038,Dodge,Charger Scat Pack Widebody,2023,485,Muscle
+veh-syn-039,Chevrolet,Camaro SS 1LE,2020,455,Muscle
+veh-syn-040,Chevrolet,Camaro ZL1,2022,650,Muscle
+veh-syn-041,Chevrolet,Corvette Stingray,2023,495,Muscle
+veh-syn-042,Chevrolet,Corvette Z06,2023,670,Muscle
+veh-syn-043,Cadillac,CT5-V Blackwing,2023,668,Muscle
+veh-syn-044,Jeep,Grand Cherokee Trackhawk,2021,707,Muscle
+veh-syn-045,Tesla,Model S Plaid,2023,1000,Muscle
+veh-syn-046,Ford,F-150 Raptor R,2023,700,Muscle
+veh-syn-047,Dodge,Charger SRT Hellcat Redeye,2022,797,Muscle
+veh-syn-048,Ford,Mustang Mach 1,2021,480,Muscle
+veh-syn-049,Chevrolet,Silverado RST,2022,420,Muscle
+veh-syn-050,Dodge,Durango SRT Hellcat,2021,710,Muscle

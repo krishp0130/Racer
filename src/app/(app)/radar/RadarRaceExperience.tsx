@@ -6,19 +6,18 @@ import {
   useMemo,
   useRef,
   useState,
-  type FormEvent,
 } from "react";
 import Map, { Marker } from "react-map-gl/maplibre";
 import maplibregl from "maplibre-gl";
+import { AnimatePresence, motion } from "framer-motion";
 import type { LngLat } from "@/lib/geo";
 import { haversineMeters, interpolateToward, metersToMiles } from "@/lib/geo";
 import { useSyntheticFleetTelemetry } from "@/hooks/useSyntheticFleetTelemetry";
 import {
-  bundleFromMatch,
-  getDefaultOpponentBundle,
-  mockLlmMatchRaceQuery,
-  type OpponentBundle,
-} from "@/services/aipMatchmaker";
+  MatchmakerChat,
+  FIND_RACE_PROMPT,
+} from "@/components/matchmaker/MatchmakerChat";
+import { getDefaultOpponentBundle, type OpponentBundle } from "@/services/aipMatchmaker";
 import "maplibre-gl/dist/maplibre-gl.css";
 
 /** OpenStreetMap-based vector tiles (streets, labels, POIs) — free, no API key. @see https://openfreemap.org/ */
@@ -56,13 +55,10 @@ export default function RadarRaceExperience() {
   const [speedMph, setSpeedMph] = useState(0);
   const [countdownLabel, setCountdownLabel] = useState<string | null>(null);
   const [acceptNotice, setAcceptNotice] = useState(false);
-  const [aipQuery, setAipQuery] = useState("");
-  const [aipLoading, setAipLoading] = useState(false);
-  const [aipBanner, setAipBanner] = useState<string | null>(null);
+  const [matchmakerOpen, setMatchmakerOpen] = useState(false);
   const acceptTimersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
   const raceTickRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const raceSpeedRef = useRef(0);
-  const aipBannerTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const showAipChat =
     phase === "browsing" ||
@@ -90,21 +86,17 @@ export default function RadarRaceExperience() {
     return () => {
       clearAcceptTimers();
       clearRaceTick();
-      if (aipBannerTimerRef.current) clearTimeout(aipBannerTimerRef.current);
     };
   }, [clearAcceptTimers, clearRaceTick]);
 
   useEffect(() => {
-    if (!aipBanner) return;
-    if (aipBannerTimerRef.current) clearTimeout(aipBannerTimerRef.current);
-    aipBannerTimerRef.current = setTimeout(() => {
-      setAipBanner(null);
-      aipBannerTimerRef.current = null;
-    }, 5200);
-    return () => {
-      if (aipBannerTimerRef.current) clearTimeout(aipBannerTimerRef.current);
+    if (!matchmakerOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMatchmakerOpen(false);
     };
-  }, [aipBanner]);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [matchmakerOpen]);
 
   useEffect(() => {
     if (phase !== "awaitingAccept" || !finish) return;
@@ -205,35 +197,6 @@ export default function RadarRaceExperience() {
       setPhase("awaitingAccept");
     },
     [phase],
-  );
-
-  const onAipSubmit = useCallback(
-    async (e: FormEvent) => {
-      e.preventDefault();
-      if (aipLoading || !showAipChat) return;
-      const q = aipQuery.trim();
-      if (!q) return;
-      setAipLoading(true);
-      try {
-        const match = await mockLlmMatchRaceQuery(q);
-        if (match) {
-          setOpponent(bundleFromMatch(match));
-          setFinish(null);
-          setAipBanner(
-            `AIP Match Found: Challenging ${match.driver.username} in a ${match.vehicle.make} ${match.vehicle.model}`,
-          );
-          setPhase("placingFinish");
-          setAipQuery("");
-        } else {
-          setAipBanner(
-            "No AIP match — try another query (e.g. JDM under 400hp).",
-          );
-        }
-      } finally {
-        setAipLoading(false);
-      }
-    },
-    [aipLoading, aipQuery, showAipChat],
   );
 
   const mapCursor =
@@ -349,44 +312,66 @@ export default function RadarRaceExperience() {
 
         {showAipChat ? (
           <div className="pointer-events-auto absolute left-3 right-3 top-3 z-[28] flex justify-center sm:left-5 sm:right-5 sm:top-5 md:left-6 md:right-6 md:top-6">
-            <form
-              onSubmit={onAipSubmit}
-              className="flex w-full max-w-2xl items-center gap-2 rounded-2xl border border-[var(--border)] bg-[color-mix(in_oklab,var(--surface-elevated)_78%,transparent)] px-3 py-2 shadow-[0_8px_32px_rgba(0,0,0,0.35)] backdrop-blur-xl md:gap-3 md:px-4 md:py-2.5"
+            <motion.button
+              type="button"
+              onClick={() => setMatchmakerOpen(true)}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="group relative w-full max-w-xl overflow-hidden rounded-xl border border-cyan-400/45 bg-[color-mix(in_oklab,#050508_88%,transparent)] py-3 shadow-[0_0_36px_-6px_rgba(34,211,238,0.35),0_8px_32px_rgba(0,0,0,0.45)] backdrop-blur-xl transition-colors hover:border-fuchsia-400/50"
             >
               <span
-                className="shrink-0 rounded-md bg-[var(--accent-glow)] px-1.5 py-0.5 text-[0.55rem] font-bold uppercase tracking-[0.12em] text-[var(--accent)]"
-                aria-hidden
-              >
-                AIP
-              </span>
-              <input
-                type="search"
-                name="aip-race-query"
-                value={aipQuery}
-                onChange={(ev) => setAipQuery(ev.target.value)}
-                placeholder="Ask AIP for a race..."
-                autoComplete="off"
-                disabled={aipLoading}
-                className="min-w-0 flex-1 bg-transparent text-sm text-[var(--foreground)] outline-none placeholder:text-[var(--muted)] disabled:opacity-50 md:text-base"
+                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity group-hover:opacity-100"
+                style={{
+                  background:
+                    "linear-gradient(100deg, transparent 0%, rgba(34,211,238,0.08) 40%, rgba(217,70,239,0.1) 60%, transparent 100%)",
+                }}
               />
-              <button
-                type="submit"
-                disabled={aipLoading || !aipQuery.trim()}
-                className="shrink-0 rounded-xl bg-[var(--accent)] px-3 py-2 text-xs font-bold uppercase tracking-wider text-[#04100e] shadow-[0_0_20px_var(--accent-soft)] transition-opacity disabled:opacity-40"
-              >
-                {aipLoading ? "…" : "Run"}
-              </button>
-            </form>
+              <span className="relative flex items-center justify-center gap-2 px-4">
+                <span className="font-mono text-[0.6rem] font-bold uppercase tracking-[0.28em] text-cyan-300/90">
+                  AIP
+                </span>
+                <span className="font-mono text-sm font-bold uppercase tracking-[0.18em] text-fuchsia-100/95 md:text-base">
+                  {FIND_RACE_PROMPT}
+                </span>
+              </span>
+            </motion.button>
           </div>
         ) : null}
 
-        {aipBanner ? (
-          <div className="pointer-events-none absolute left-3 right-3 top-[4.25rem] z-[27] flex justify-center sm:top-[4.75rem] md:top-[5.25rem]">
-            <p className="max-w-2xl rounded-xl border border-[var(--accent-soft)] bg-[color-mix(in_oklab,#0a1018_92%,var(--accent)_8%)] px-4 py-2.5 text-center text-xs font-medium leading-snug text-[var(--foreground)] shadow-[0_0_24px_var(--accent-soft)] backdrop-blur-md animate-[race-toast_0.45s_ease-out_both] sm:text-sm md:text-base">
-              {aipBanner}
-            </p>
-          </div>
-        ) : null}
+        <AnimatePresence>
+          {matchmakerOpen && showAipChat ? (
+            <>
+              <motion.button
+                type="button"
+                key="mm-backdrop"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="absolute inset-0 z-[45] bg-black/65 backdrop-blur-[3px]"
+                aria-label="Close matchmaker"
+                onClick={() => setMatchmakerOpen(false)}
+              />
+              <motion.div
+                key="mm-panel"
+                role="dialog"
+                aria-modal="true"
+                aria-label="Foundry matchmaker"
+                initial={{ opacity: 0, scale: 0.94, y: 12 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.96, y: 8 }}
+                transition={{ type: "spring", stiffness: 380, damping: 28 }}
+                className="absolute left-1/2 top-1/2 z-[46] w-[calc(100%-1.25rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 px-0 sm:w-full"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <MatchmakerChat
+                  variant="compact"
+                  onClose={() => setMatchmakerOpen(false)}
+                />
+              </motion.div>
+            </>
+          ) : null}
+        </AnimatePresence>
 
         {phase === "placingFinish" ? (
           <div className="pointer-events-none absolute inset-x-0 bottom-4 z-20 flex justify-center px-3">

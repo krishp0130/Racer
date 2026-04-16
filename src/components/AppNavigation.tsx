@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 
 const navItems = [
   { href: "/radar", label: "Radar", sublabel: "Map", Icon: RadarIcon },
+  { href: "/matchmaker", label: "AIP", sublabel: "Agent", Icon: AipIcon },
   { href: "/garages", label: "Garage", sublabel: "You", Icon: GarageIcon },
   { href: "/track", label: "Track", sublabel: "0–60", Icon: TrackIcon },
   {
@@ -18,6 +19,25 @@ const navItems = [
 ] as const;
 
 type Item = (typeof navItems)[number];
+
+function AipIcon({ active }: { active: boolean }) {
+  return (
+    <svg
+      aria-hidden
+      className="h-6 w-6 shrink-0 md:h-5 md:w-5"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={active ? 2.25 : 1.75}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M12 3v4M12 17v4M3 12h4M17 12h4" />
+      <path d="m8 8 8 8M16 8l-8 8" opacity={active ? 1 : 0.45} />
+      <circle cx="12" cy="12" r="2.5" />
+    </svg>
+  );
+}
 
 function RadarIcon({ active }: { active: boolean }) {
   return (
@@ -201,7 +221,7 @@ export function AppNavigation() {
         aria-label="Primary"
       >
         <Link
-          href="/radar"
+          href="/"
           className="mb-10 px-3 text-lg font-bold tracking-tight text-[var(--foreground)]"
         >
           Racer
